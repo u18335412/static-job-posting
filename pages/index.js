@@ -18,7 +18,7 @@ const Header = () => {
   return (
     <>
       <div className=" bg-desaturatedCyan h-36 relative mb-16">
-        <Image src={headerImage} layout="fill"></Image>
+        <Image src={headerImage} layout="fill" priority={true}></Image>
       </div>
     </>
   );
@@ -76,7 +76,7 @@ const JobCard = (props) => {
                 <div className=" min-w-max md:flex justify-between items-center space-x-4 ">
                   <div className="relative left-5 -top-12 md:top-0 md:left-0">
                     <div className=" absolute md:relative w-14 md:min-w-max">
-                      <Image src={images[idx]} alt="company logo"></Image>
+                      <Image src={images[idx]} alt="company logo" priority={true}></Image>
                     </div>
                   </div>
                   <div className="space-y-1 md:py-0 py-5">
