@@ -17,7 +17,7 @@ import uniqid from "uniqid";
 const Header = () => {
   return (
     <>
-      <div className=" bg-desaturatedCyan h-24 relative mb-16">
+      <div className=" bg-desaturatedCyan h-36 relative mb-16">
         <Image src={headerImage} layout="fill"></Image>
       </div>
     </>
@@ -90,7 +90,7 @@ const JobCard = (props) => {
                         </span>
                       )}
                       {j.featured && (
-                        <span className="  font-bold text-white text-xs bg-black pt-2 pb-1 px-3 rounded-xl">
+                        <span className="  font-bold text-white text-xs bg-veryDarkishCyan pt-2 pb-1 px-3 rounded-xl">
                           FEATURED
                         </span>
                       )}
