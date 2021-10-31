@@ -71,7 +71,7 @@ const JobCard = (props) => {
         if (j.show === false) return;
         return (
           <div
-            className="py-3 px-1 shadow-md rounded-md mb-10 relative"
+            className="py-3 px-1 shadow-md rounded-md mb-10 relative bg-white"
             key={uniqid()}
           >
             {j.featured === true && (
