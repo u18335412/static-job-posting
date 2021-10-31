@@ -17,7 +17,7 @@ import uniqid from "uniqid";
 const Header = () => {
   return (
     <>
-      <div className=" bg-desaturatedCyan h-36 relative mb-16">
+      <div className=" bg-desaturatedCyan h-40 relative mb-16">
         <Image src={headerImage} layout="fill" priority={true}></Image>
       </div>
     </>
