@@ -26,9 +26,9 @@ const Header = () => {
 
 const FilterDiv = (props) => {
   return (
-    <div className="relative">
+    <div className="relative transition-all">
       {props.filters.length > 0 && (
-        <div className=" bg-white shadow-md rounded-md w-full relative px-10 py-5 -top-24 flex flex-wrap gap-2 transition-all">
+        <div className="bg-white shadow-md rounded-md w-full relative px-10 py-5 -top-24 flex flex-wrap items-center  gap-2 transition-all">
           {props.filters.map((c) => {
             return (
               <div
@@ -70,17 +70,29 @@ const JobCard = (props) => {
       {data.map((j, idx) => {
         if (j.show === false) return;
         return (
-          <div className=" shadow-md rounded-md mb-5 " key={uniqid()}>
-            <div className=" mb-10 md:mb-5 md:flex justify-between space-x-5 items-center px-10 py-5">
+          <div
+            className="py-3 px-1 shadow-md rounded-md mb-10 relative"
+            key={uniqid()}
+          >
+            {j.featured === true && (
+              <span className="overflow-hidden">
+                <span className="absolute top-0 left-0 rounded-tl-2xl rounded-bl-2xl bg-desaturatedCyan h-full w-1 inline "></span>
+              </span>
+            )}
+            <div className=" mb-10 md:mb-0 md:flex justify-between space-x-5 items-center px-5 py-5">
               <div>
                 <div className=" min-w-max md:flex justify-between items-center space-x-4 ">
                   <div className="relative left-5 -top-12 md:top-0 md:left-0">
                     <div className=" absolute md:relative w-14 md:min-w-max">
-                      <Image src={images[idx]} alt="company logo" priority={true}></Image>
+                      <Image
+                        src={images[idx]}
+                        alt="company logo"
+                        priority={true}
+                      ></Image>
                     </div>
                   </div>
-                  <div className="space-y-1 md:py-0 py-5">
-                    <p className="space-x-4">
+                  <div className="space-y-1 md:py-0 py-5 min-w-max">
+                    <div className="flex items-center gap-1 flex-wrap">
                       <span className=" font-bold text-sm text-desaturatedCyan">
                         {j.company}
                       </span>
@@ -94,11 +106,11 @@ const JobCard = (props) => {
                           FEATURED
                         </span>
                       )}
-                    </p>
+                    </div>
                     <p className=" font-bold cursor-pointer hover:text-desaturatedCyan">
                       {j.position}
                     </p>
-                    <div className=" text-sm text-veryDarkishCyan">
+                    <div className=" text-base text-opacity-50 text-veryDarkishCyan">
                       <ul>
                         <li className="inline">
                           {j.postedAt}
@@ -118,10 +130,10 @@ const JobCard = (props) => {
                   </div>
                 </div>
               </div>
-              <div className=" border-t-[1px] border-gray-300 pt-5 md:pt-0 md:border-t-0 justify-start flex flex-wrap text-desaturatedCyan font-bold gap-y-2">
+              <div className=" border-t-[1px] border-gray-300 pt-5 md:pt-0 md:border-t-0 justify-start flex flex-wrap text-desaturatedCyan font-bold gap-y-2 ">
                 {j.role && (
                   <span
-                    className=" hover:bg-desaturatedCyan hover:text-white bg-lightGrayishCyanFilterTablets  px-2 py-1 rounded-md cursor-pointer mr-2"
+                    className="transition-all hover:bg-desaturatedCyan hover:text-white bg-lightGrayishCyanFilterTablets  px-2 py-1 rounded-md cursor-pointer mr-2"
                     onClick={() => {
                       props.update(j.role);
                     }}
@@ -131,7 +143,7 @@ const JobCard = (props) => {
                 )}
                 {j.level && (
                   <span
-                    className=" hover:bg-desaturatedCyan hover:text-white bg-lightGrayishCyanFilterTablets px-2 py-1 rounded-md cursor-pointer mr-2"
+                    className="transition-all hover:bg-desaturatedCyan hover:text-white bg-lightGrayishCyanFilterTablets px-2 py-1 rounded-md cursor-pointer mr-2"
                     onClick={() => {
                       props.update(j.level);
                     }}
@@ -142,7 +154,7 @@ const JobCard = (props) => {
                 {j.languages.map((c, idx) => {
                   return (
                     <span
-                      className=" hover:bg-desaturatedCyan hover:text-white bg-lightGrayishCyanFilterTablets px-2 py-1 rounded-md cursor-pointer mr-2"
+                      className="transition-all hover:bg-desaturatedCyan hover:text-white bg-lightGrayishCyanFilterTablets px-2 py-1 rounded-md cursor-pointer mr-2"
                       onClick={() => {
                         props.update(c);
                       }}
@@ -155,7 +167,7 @@ const JobCard = (props) => {
                 {j.tools.map((c, idx) => {
                   return (
                     <span
-                      className=" hover:bg-desaturatedCyan hover:text-white bg-lightGrayishCyanFilterTablets px-2 py-1 rounded-md cursor-pointer mr-2"
+                      className=" transition-all hover:bg-desaturatedCyan hover:text-white bg-lightGrayishCyanFilterTablets px-2 py-1 rounded-md cursor-pointer mr-2"
                       onClick={() => {
                         props.update(c, 4);
                       }}
