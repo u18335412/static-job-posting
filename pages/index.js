@@ -23,7 +23,7 @@ const Header = () => {
 
 const FilterDiv = (props) => {
   return (
-    <div className="relative transition-all">
+    <div className="relative transition-all w-full max-w-[69.375rem]">
       {props?.filters?.length > 0 && (
         <div className="flex">
           <div className="relative flex flex-wrap items-center w-full gap-2 px-10 py-5 transition-all bg-white rounded-md shadow-md -top-24">
@@ -187,7 +187,7 @@ export default function Home() {
     <>
       <Header></Header>
       <main className="h-full min-h-screen px-5 text-base bg-lightGrayishCyanBackground">
-        <section>
+        <section className="flex justify-center">
           <FilterDiv filters={filters} update={removeFilter}></FilterDiv>
         </section>
         <JobCard filters={filters} update={addFilter} jobs={data}></JobCard>
