@@ -4,7 +4,7 @@ import uniqid from "uniqid";
 
 const Header = () => {
   return (
-    <>
+    <header>
       <div className="relative h-[9.75rem] mb-16 bg-desaturatedCyan">
         <img
           className="hidden object-cover w-full h-full md:block"
@@ -17,7 +17,7 @@ const Header = () => {
           alt="header background image"
         />
       </div>
-    </>
+    </header>
   );
 };
 
