@@ -1,24 +1,21 @@
-import headerImage from "../images/bg-header-desktop.svg";
-import Image from "next/image";
-import companyImage from "../images/insure.svg";
-import dataJson from "../data.json";
-import account from "../images/account.svg";
-import eyecam from "../images/eyecam-co.svg";
-import faceit from "../images/faceit.svg";
-import manage from "../images/manage.svg";
-import loopstudios from "../images/loop-studios.svg";
-import myhome from "../images/myhome.svg";
-import photosnap from "../images/photosnap.svg";
-import shortly from "../images/shortly.svg";
-import theair from "../images/the-air-filter-company.svg";
 import { useState } from "react";
+import dataJson from "/data.json";
 import uniqid from "uniqid";
 
 const Header = () => {
   return (
     <>
-      <div className=" bg-desaturatedCyan h-40 relative mb-16">
-        <Image src={headerImage} layout="fill" priority={true}></Image>
+      <div className="relative h-[9.75rem] mb-16 bg-desaturatedCyan">
+        <img
+          className="hidden object-cover w-full h-full md:block"
+          src="/assets/images/bg-header-desktop.svg"
+          alt="header background image"
+        />
+        <img
+          className="object-cover w-full h-full md:hidden"
+          src="/assets/images/bg-header-mobile.svg"
+          alt="header background image"
+        />
       </div>
     </>
   );
@@ -27,24 +24,31 @@ const Header = () => {
 const FilterDiv = (props) => {
   return (
     <div className="relative transition-all">
-      {props.filters.length > 0 && (
-        <div className="bg-white shadow-md rounded-md w-full relative px-10 py-5 -top-24 flex flex-wrap items-center  gap-2 transition-all">
-          {props.filters.map((c) => {
-            return (
-              <div
-                className="text-desaturatedCyan rounded-md flex items-center max-w-max bg-lightGrayishCyanFilterTablets"
-                key={uniqid()}
-              >
-                <span className=" font-bold text-sm px-1">{c}</span>
-                <span
-                  onClick={() => props.update(c)}
-                  className=" rounded-tr-md rounded-br-md text-white bg-desaturatedCyan cursor-pointer transition-all hover:text-white hover:bg-black py-1 px-2 font-bold"
+      {props?.filters?.length > 0 && (
+        <div className="flex">
+          <div className="relative flex flex-wrap items-center w-full gap-2 px-10 py-5 transition-all bg-white rounded-md shadow-md -top-24">
+            {props.filters.map((c) => {
+              return (
+                <div
+                  className="flex items-center rounded-md text-desaturatedCyan max-w-max bg-lightGrayishCyanFilterTablets gap-x-2"
+                  key={uniqid()}
                 >
-                  X
-                </span>
-              </div>
-            );
-          })}
+                  <span className="px-1 text-sm font-bold ">{c}</span>
+                  <span
+                    onClick={() => props.update(c)}
+                    className="px-2 py-1 font-bold text-white transition-all cursor-pointer rounded-tr-md rounded-br-md bg-desaturatedCyan hover:text-white hover:bg-[hsla(180,14%,20%,1)]"
+                  >
+                    X
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+          {/* {props?.filters?.length > 0 && (
+            <button className="relative text-xs font-bold -top-24 right-20 text-desaturatedCyan hover:underline">
+              Clear
+            </button>
+          )} */}
         </div>
       )}
     </div>
@@ -53,136 +57,98 @@ const FilterDiv = (props) => {
 
 const JobCard = (props) => {
   const data = props.jobs;
-  const images = [
-    photosnap,
-    manage,
-    account,
-    myhome,
-    loopstudios,
-    faceit,
-    shortly,
-    companyImage,
-    eyecam,
-    theair,
-  ];
   return (
-    <>
-      {data.map((j, idx) => {
+    <ul className="flex flex-col items-center gap-6">
+      {data.map((j) => {
         if (j.show === false) return;
         return (
-          <div
-            className="py-3 px-1 shadow-md rounded-md mb-10 relative bg-white"
-            key={uniqid()}
-          >
-            {j.featured === true && (
-              <span className="overflow-hidden">
-                <span className="absolute top-0 left-0 rounded-tl-2xl rounded-bl-2xl bg-desaturatedCyan h-full w-1 inline "></span>
-              </span>
-            )}
-            <div className=" mb-10 md:mb-0 md:flex justify-between space-x-5 items-center px-5 py-5">
-              <div>
-                <div className=" min-w-max md:flex justify-between items-center space-x-4 ">
-                  <div className="relative left-5 -top-12 md:top-0 md:left-0">
-                    <div className=" absolute md:relative w-14 md:min-w-max">
-                      <Image
-                        src={images[idx]}
-                        alt="company logo"
-                        priority={true}
-                      ></Image>
+          <li className="w-full md:max-w-[69.375rem]">
+            <div
+              className="relative w-full rounded-md shadow-md"
+              key={uniqid()}
+            >
+              {j.featured === true && (
+                <span className="overflow-hidden">
+                  <span className="absolute top-0 left-0 inline w-[5px] h-full rounded-tl-2xl rounded-bl-2xl bg-desaturatedCyan "></span>
+                </span>
+              )}
+              <div className="items-center justify-between px-6 py-8 mb-10 md:px-10 md:mb-0 md:flex">
+                <div>
+                  <div className="items-center justify-between gap-x-6 min-w-max md:flex">
+                    <div className="relative -top-14 md:top-0 md:left-0">
+                      <div className="absolute md:relative md:h-[5.5rem] md:w-[5.5rem] md:min-w-max w-12 h-12">
+                        <img
+                          src={`assets${j.logo}`}
+                          alt={`${j.company} logo`}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="space-y-1 md:py-0 py-5 min-w-max">
-                    <div className="flex items-center gap-1 flex-wrap">
-                      <span className=" font-bold text-sm text-desaturatedCyan">
-                        {j.company}
-                      </span>
-                      {j.new && (
-                        <span className=" font-bold text-white text-xs bg-desaturatedCyan pt-2 pb-1  px-3 rounded-xl">
-                          <label>NEW!</label>
+                    <div className="py-5 space-y-1 md:py-0 min-w-max">
+                      <div className="flex flex-wrap items-center">
+                        <span className="mr-4 text-sm font-bold text-desaturatedCyan">
+                          {j.company}
                         </span>
-                      )}
-                      {j.featured && (
-                        <span className="  font-bold text-white text-xs bg-veryDarkishCyan pt-2 pb-1 px-3 rounded-xl">
-                          FEATURED
-                        </span>
-                      )}
-                    </div>
-                    <p className=" font-bold cursor-pointer hover:text-desaturatedCyan">
-                      {j.position}
-                    </p>
-                    <div className=" text-base text-opacity-50 text-veryDarkishCyan">
-                      <ul>
-                        <li className="inline">
-                          {j.postedAt}
-                          <span aria-hidden="true" className=" font-bold mx-2">
-                            ·
+                        {j.new && (
+                          <span className="px-2  mr-2 text-[0.688rem] font-bold text-white bg-desaturatedCyan rounded-xl">
+                            <label>NEW!</label>
                           </span>
-                        </li>
-                        <li className="inline">
-                          {j.contract}
-                          <span aria-hidden="true" className=" font-bold mx-2">
-                            ·
+                        )}
+                        {j.featured && (
+                          <span className="px-2  text-[0.688rem] font-bold text-white bg-veryDarkishCyan rounded-xl">
+                            FEATURED
                           </span>
-                        </li>
-                        <li className="inline">{j.location}</li>
-                      </ul>
+                        )}
+                      </div>
+                      <p className="font-bold text-[1.125rem] cursor-pointer hover:text-desaturatedCyan">
+                        {j.position}
+                      </p>
+                      <div className="text-base text-opacity-50 text-veryDarkishCyan">
+                        <ul>
+                          <li className="inline">
+                            {j.postedAt}
+                            <span
+                              aria-hidden="true"
+                              className="mx-2 font-bold "
+                            >
+                              ·
+                            </span>
+                          </li>
+                          <li className="inline">
+                            {j.contract}
+                            <span
+                              aria-hidden="true"
+                              className="mx-2 font-bold "
+                            >
+                              ·
+                            </span>
+                          </li>
+                          <li className="inline">{j.location}</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className=" border-t-[1px] border-gray-300 pt-5 md:pt-0 md:border-t-0 justify-start flex flex-wrap text-desaturatedCyan font-bold gap-y-2 ">
-                {j.role && (
-                  <span
-                    className="transition-all hover:bg-desaturatedCyan hover:text-white bg-lightGrayishCyanFilterTablets  px-2 py-1 rounded-md cursor-pointer mr-2"
-                    onClick={() => {
-                      props.update(j.role);
-                    }}
-                  >
-                    {j.role}
-                  </span>
-                )}
-                {j.level && (
-                  <span
-                    className="transition-all hover:bg-desaturatedCyan hover:text-white bg-lightGrayishCyanFilterTablets px-2 py-1 rounded-md cursor-pointer mr-2"
-                    onClick={() => {
-                      props.update(j.level);
-                    }}
-                  >
-                    {j.level}
-                  </span>
-                )}
-                {j.languages.map((c, idx) => {
-                  return (
-                    <span
-                      className="transition-all hover:bg-desaturatedCyan hover:text-white bg-lightGrayishCyanFilterTablets px-2 py-1 rounded-md cursor-pointer mr-2"
-                      onClick={() => {
-                        props.update(c);
-                      }}
-                      key={uniqid()}
-                    >
-                      {c}
-                    </span>
-                  );
-                })}
-                {j.tools.map((c, idx) => {
-                  return (
-                    <span
-                      className=" transition-all hover:bg-desaturatedCyan hover:text-white bg-lightGrayishCyanFilterTablets px-2 py-1 rounded-md cursor-pointer mr-2"
-                      onClick={() => {
-                        props.update(c, 4);
-                      }}
-                      key={uniqid()}
-                    >
-                      {c}
-                    </span>
-                  );
-                })}
+                <div className=" border-t-[1px] border-[hsla(180,10%,74%,1)] pt-4 md:pt-0 md:border-t-0 md:justify-end flex flex-wrap text-desaturatedCyan w-full font-bold gap-y-2 gap-x-4">
+                  {[j?.role, j?.level, ...j?.languages, ...j?.tools].map((c) => {
+                    return (
+                      <span
+                        className="px-2 py-1 transition-all rounded-md cursor-pointer text-[0.813rem] hover:bg-desaturatedCyan hover:text-white bg-lightGrayishCyanFilterTablets"
+                        onClick={() => {
+                          props.update(c);
+                        }}
+                        key={uniqid()}
+                      >
+                        {c}
+                      </span>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
+          </li>
         );
       })}
-    </>
+    </ul>
   );
 };
 
@@ -205,20 +171,22 @@ export default function Home() {
   };
 
   const updateFilters = () => {
-    const data = dataJson.map((j) => {
-      const data = JSON.stringify(j);
-      for (let i = 0; i < filters.length; i++) {
-        if (data.includes(filters[i]) === false) return { ...j, show: false };
-      }
-      return { ...j, show: true };
-    });
-    setData([...data]);
+    setData([
+      ...dataJson.map((j) => {
+        const stringData = JSON.stringify(j);
+        for (const element of filters) {
+          if (stringData.includes(element) === false)
+            return { ...j, show: false };
+        }
+        return { ...j, show: true };
+      }),
+    ]);
   };
 
   return (
     <>
       <Header></Header>
-      <main className=" text-base bg-lightGrayishCyanBackground min-h-screen h-full px-5 xl:px-40">
+      <main className="h-full min-h-screen px-5 text-base bg-lightGrayishCyanBackground">
         <section>
           <FilterDiv filters={filters} update={removeFilter}></FilterDiv>
         </section>
