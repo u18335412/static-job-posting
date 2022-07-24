@@ -186,7 +186,7 @@ export default function Home() {
   return (
     <>
       <Header></Header>
-      <main className="h-full min-h-screen px-5 text-base bg-lightGrayishCyanBackground">
+      <main className="h-full min-h-screen px-5 text-base">
         <section className="flex justify-center">
           <FilterDiv filters={filters} update={removeFilter}></FilterDiv>
         </section>
