@@ -62,7 +62,7 @@ const JobCard = (props) => {
       {data.map((j) => {
         if (j.show === false) return;
         return (
-          <li className="w-full md:max-w-[69.375rem]">
+          <li className="w-full md:max-w-[69.375rem]" key={uniqid()}>
             <div
               className="relative w-full rounded-md shadow-md"
               key={uniqid()}
@@ -129,19 +129,21 @@ const JobCard = (props) => {
                   </div>
                 </div>
                 <div className=" border-t-[1px] border-[hsla(180,10%,74%,1)] pt-4 md:pt-0 md:border-t-0 md:justify-end flex flex-wrap text-desaturatedCyan w-full font-bold gap-y-2 gap-x-4">
-                  {[j?.role, j?.level, ...j?.languages, ...j?.tools].map((c) => {
-                    return (
-                      <span
-                        className="px-2 py-1 transition-all rounded-md cursor-pointer text-[0.813rem] hover:bg-desaturatedCyan hover:text-white bg-lightGrayishCyanFilterTablets"
-                        onClick={() => {
-                          props.update(c);
-                        }}
-                        key={uniqid()}
-                      >
-                        {c}
-                      </span>
-                    );
-                  })}
+                  {[j?.role, j?.level, ...j?.languages, ...j?.tools].map(
+                    (c) => {
+                      return (
+                        <span
+                          className="px-2 py-1 transition-all rounded-md cursor-pointer text-[0.813rem] hover:bg-desaturatedCyan hover:text-white bg-lightGrayishCyanFilterTablets"
+                          onClick={() => {
+                            props.update(c);
+                          }}
+                          key={uniqid()}
+                        >
+                          {c}
+                        </span>
+                      );
+                    }
+                  )}
                 </div>
               </div>
             </div>
@@ -152,8 +154,16 @@ const JobCard = (props) => {
   );
 };
 
-export default function Home() {
-  const [data, setData] = useState(dataJson);
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      data: dataJson,
+    },
+  };
+}
+
+export default function Home(datar) {
+  const [data, setData] = useState(datar.data);
 
   const [filters, setFilters] = useState([]);
 
